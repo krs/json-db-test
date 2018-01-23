@@ -1,0 +1,6 @@
+rootProject.name = "json-db-test"
+
+include(
+    "json-db-test-core",
+    "json-db-test-mongodb",
+)

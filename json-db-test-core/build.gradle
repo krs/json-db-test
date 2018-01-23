@@ -1,0 +1,6 @@
+jar {
+    baseName = "json-db-test-core"
+}
+
+dependencies {
+}

@@ -1,0 +1,11 @@
+jar {
+    baseName = "json-db-test-mongodb"
+}
+
+dependencies {
+	compile project(':json-db-test-core')
+	
+	compile 'org.mongodb:mongo-java-driver:3.4.3'
+	
+	testCompile 'com.github.fakemongo:fongo:2.1.0'
+}

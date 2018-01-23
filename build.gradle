@@ -1,0 +1,68 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.1'
+    }
+}
+ 
+apply plugin: 'java'
+
+project.ext {
+    junitVersion = '5.0.1'
+    assertjVersion = '3.8.0'
+    commonsLangVersion = '3.7'
+	commonsCollectionsVersion = '4.1'
+	commonsIoVersion = '1.3.2'
+    jacksonVersion = '2.9.2'
+	lombokVersion = '1.16.18'
+	mockitoVersion = '2.12.0'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'maven'
+    apply plugin: 'org.junit.platform.gradle.plugin'
+    
+    version = '0.0.1'
+    group = 'com.github.krs'
+    
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    
+    jar {
+        version = "$version"
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+    
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compile(
+			"org.apache.commons:commons-lang3:$commonsLangVersion",
+			"org.apache.commons:commons-collections4:$commonsCollectionsVersion",
+			"org.apache.commons:commons-io:$commonsIoVersion",
+            "com.fasterxml.jackson.core:jackson-core:$jacksonVersion",
+            "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion",
+            "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
+			"org.projectlombok:lombok:$lombokVersion",
+        )
+        testCompile(
+            "org.junit.jupiter:junit-jupiter-api:$junitVersion",
+			"org.assertj:assertj-core:$assertjVersion",
+			"org.mockito:mockito-core:$mockitoVersion"
+        )
+        testRuntime(
+            "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+        )
+    }
+}
+
+dependencies {
+    compile project(':json-db-test-core')
+    compile project(':json-db-test-mongodb')
+}
